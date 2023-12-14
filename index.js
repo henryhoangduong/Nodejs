@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const axios = require("axios");
 var cors = require("cors");
+const Sendemail = require('./Sendemail')
 
 // const methodOverride = require("method-override");
 
@@ -35,6 +36,16 @@ app.get("/listrecord", getToken, async (req, res) => {
   console.log("index.js data: ", data);
   res.json(data.data.data.items);
 });
+
+
+//Send email
+app.get('/Sendemail', (req,res) => {
+  Sendemail.sendMail();
+  res.json({ 'good':'good'});
+})
+
+
+
 
 app.listen(5000, (req, res) => {
   console.log("App is listening on port 5000");
