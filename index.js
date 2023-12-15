@@ -4,6 +4,7 @@ const path = require("path");
 const axios = require("axios");
 var cors = require("cors");
 const Sendemail = require('./Sendemail')
+const chatgpt = require("./chatgpt");
 
 // const methodOverride = require("method-override");
 
@@ -39,11 +40,19 @@ app.get("/listrecord", getToken, async (req, res) => {
 
 
 //Send email
-app.get('/sendemail', (req,res) => {
+app.get('/sendemail', (req, res) => {
+  
   Sendemail.sendMail();
   res.json({ 'message':'successful'});
 })
 
+
+//Send email using chatgpt
+app.get('/sendemailchatgpt',async (req, res) => {
+  const text = await chatgpt.mailHoaDon ();
+  Sendemail.sendMail(text);
+  res.json({ 'message':'successful'});
+})
 
 app.post("/lead", getToken, async (req, res) => {
   axios.defaults.headers.common = {

@@ -17,11 +17,12 @@ const mailOptions = {
   from: process.env.EMAIL,
   to: "henryhoangduong@gmail.com",
   subject: "Test Email",
-  text: "This is a test email sent from Node.js using Nodemailer.",
+  text: "",
 };
 
 // Send email
-const sendMail = () => {
+const sendMail = (text) => {
+  mailOptions.text = text;
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.error("Error sending email:", error);
