@@ -39,13 +39,39 @@ app.get("/listrecord", getToken, async (req, res) => {
 
 
 //Send email
-app.get('/Sendemail', (req,res) => {
+app.get('/sendemail', (req,res) => {
   Sendemail.sendMail();
-  res.json({ 'good':'good'});
+  res.json({ 'message':'successful'});
 })
 
 
-
+app.post("/lead", getToken, async (req, res) => {
+  axios.defaults.headers.common = {
+    Authorization: `Bearer ${req.token}`,
+  };
+  const user = req.body;
+  
+  const data = {
+    "fields": {
+      "Các mục mẹ": [],
+      "Giới tính": [user["Giới tính"]],
+      "Họ và tên": user["Họ và tên"],
+      "Nguồn": "website",
+      "Ngày liên lạc gần nhất": "",
+      "Ngày tạo": "",
+      "Nhân viên chăm sóc": [],
+      "Trạng thái": "xác định tâm tư ",
+      "Tỉnh thành": user["Tỉnh thành"],
+      "email": user["email"],
+      "số điện thoại":user["số điện thoại"],
+    },
+  };
+  
+  const url =
+    "https://open.larksuite.com/open-apis/bitable/v1/apps/VuOJbA1FhaF1oGsIi3IlFmDsgad/tables/tblGeyIIuLH1TFPD/records";
+  const response = await axios.post(url, data);
+  res.send(response.data);
+});
 
 app.listen(5000, (req, res) => {
   console.log("App is listening on port 5000");
