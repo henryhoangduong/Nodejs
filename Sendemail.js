@@ -15,13 +15,14 @@ const transporter = nodemailer.createTransport({
 // Email options
 const mailOptions = {
   from: process.env.EMAIL,
-  to: "henryhoangduong@gmail.com",
+  to: "",
   subject: "Test Email",
   text: "",
 };
 
 // Send email
-const sendMail = (text) => {
+const sendMail = (text, email) => {
+  mailOptions.to = email;
   mailOptions.text = text;
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {

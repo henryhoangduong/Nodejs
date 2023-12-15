@@ -1,7 +1,7 @@
 const OpenAI = require("openai");
 
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: process.env.apiKey,
 });
 
 async function mailCamOn() {
