@@ -8,10 +8,15 @@ const chatgpt = require("./chatgpt");
 
 // const methodOverride = require("method-override");
 
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 // app.use(methodOverride("_method"));
-app.use(cors());
 
 const getToken = async (req, res, next) => {
   const url =
