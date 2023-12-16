@@ -9,9 +9,7 @@ const chatgpt = require("./chatgpt");
 // const methodOverride = require("method-override");
 
 app.use(
-  cors({
-    origin: "*",
-  })
+  cors()
 );
 
 app.use(express.urlencoded({ extended: false }));
