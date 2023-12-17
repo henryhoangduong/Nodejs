@@ -3,7 +3,7 @@ const app = express();
 const path = require("path");
 const axios = require("axios");
 var cors = require("cors");
-const Sendemail = require('./Sendemail')
+const Sendemail = require('./Sendemail.js')
 const chatgpt = require("./chatgpt");
 
 // const methodOverride = require("method-override");
@@ -62,8 +62,8 @@ app.post("/lead", getToken, async (req, res) => {
   axios.defaults.headers.common = {
     Authorization: `Bearer ${req.token}`,
   };
+
   const user = req.body;
-  
   const data = {
     "fields": {
       "Giới tính": [user["Giới tính"]],
@@ -74,9 +74,7 @@ app.post("/lead", getToken, async (req, res) => {
       "số điện thoại":user["số điện thoại"],
     },
   };
-  
-  const url =
-    "https://open.larksuite.com/open-apis/bitable/v1/apps/VuOJbA1FhaF1oGsIi3IlFmDsgad/tables/tblGeyIIuLH1TFPD/records";
+  const url = "https://open.larksuite.com/open-apis/bitable/v1/apps/VuOJbA1FhaF1oGsIi3IlFmDsgad/tables/tblGeyIIuLH1TFPD/records";
   const response = await axios.post(url, data);
   res.send(response.data);
 });
