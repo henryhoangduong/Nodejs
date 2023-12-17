@@ -66,14 +66,9 @@ app.post("/lead", getToken, async (req, res) => {
   
   const data = {
     "fields": {
-      "Các mục mẹ": [],
       "Giới tính": [user["Giới tính"]],
       "Họ và tên": user["Họ và tên"],
       "Nguồn": "website",
-      "Ngày liên lạc gần nhất": "",
-      "Ngày tạo": "",
-      "Nhân viên chăm sóc": [],
-      "Trạng thái": "xác định tâm tư ",
       "Tỉnh thành": user["Tỉnh thành"],
       "email": user["email"],
       "số điện thoại":user["số điện thoại"],
