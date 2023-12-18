@@ -54,7 +54,7 @@ app.get('/sendemail', (req, res) => {
 app.post('/sendemailchatgpt', async (req, res) => {
   
   const text = await chatgpt.mailHoaDon ();
-  Sendemail.sendMail(text,req.body.email);
+  Sendemail.sendMail(text,'henryhoangduong@gmail.com');
   res.json({ 'message':'successful'});
 })
 
