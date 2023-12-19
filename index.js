@@ -5,6 +5,7 @@ const axios = require("axios");
 var cors = require("cors");
 const Sendemail = require('./Sendemail.js')
 const chatgpt = require("./chatgpt");
+const main = require('./Excel.js')
 
 // const methodOverride = require("method-override");
 
@@ -69,7 +70,7 @@ app.post("/lead", getToken, async (req, res) => {
       "Giới tính": [user["Giới tính"]],
       "Họ và tên": user["Họ và tên"],
       "Nguồn": "website",
-      "Tỉnh thành": user["Tỉnh thành"],
+      "địa chỉ": user["Tỉnh thành"],
       "email": user["email"],
       "số điện thoại":user["số điện thoại"],
     },
@@ -79,6 +80,13 @@ app.post("/lead", getToken, async (req, res) => {
   res.send(response.data);
 });
 
+
+app.get("/excel", async (req, res) => {
+  main.main();
+  res.send('successful')
+  }
+)
 app.listen(5000, (req, res) => {
   console.log("App is listening on port 5000");
 });
+
